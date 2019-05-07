@@ -31,6 +31,7 @@ for words in textArr:
 
 
 def main():
+    price_algo_test()
     print(textDict)
     print("---------------------")
     print("now look for the frequency of words")
@@ -147,6 +148,47 @@ def main():
     print()
     print()
     print()
+
+
+def price_algo_test():
+    print()
+    # TODO implement the price algorithm i thought of for my game here
+
+    '''
+    price formula 
+    default ceil(price + (defaultPrice * supply/demand)/2)
+    invert supply/demand to demand / supply?
+    ---
+    default price is 10
+    supply 30
+    demand 70
+    dPrice = 10 + (10 * (70/30)) = 33
+    dPrice = 10 + (10 * (70/30))/2 = 21
+    ----------------
+    supply 2
+    demand 90
+    dPrice = 10 + (10*(90/2)) / 2 = 235
+    -----------------
+    over supply 
+    supply = 70
+    demand = 10
+    dPrice = 10 + (10 * (10/70))/2 - ceil(10/70) = 10 or 9 
+    ------------------
+    supply = 90
+    demand = 2
+    dPrice = 10 + (10 * (2/90))/2) - ceil(2/90) = 
+    -------------------------
+    bell curve stuff:
+    
+    z is the number of standard deviations your data point is from the mean.
+    
+    to calculate it you take x (test score) minus it from mew (mean) and then divide by sigma (standard deviation. 
+    it will tell you how many sd away that point is from the mean and depending on that will depend on if it falls into 
+        the rejection area on a bell curve or not
+
+    '''
+
+
 
 
 

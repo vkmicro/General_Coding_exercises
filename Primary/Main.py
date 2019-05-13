@@ -173,6 +173,7 @@ def price_algo_test():
         print("------ " + str(i))
         #print("run: " + str(i))
         base_price = 10
+        # TODO: NORMALIZE SUPPLY / DEMAND SO THEY CAN"T BE TOO DIFFERENT!
         dsupply = rand.randrange(1,100)
         ddemand = rand.randrange(1,100)
         print("base price: " + str(base_price))
@@ -182,7 +183,7 @@ def price_algo_test():
         #print("supply demand ratio: aka (demand / supply) = " + str(ddemand / dsupply))
         print("supply demand ratio: aka (demand / supply) = " + str(supp_dem_ratio))
         # sell_price1 = math.ceil(base_price + (base_price * (ddemand / dsupply)))
-        if(supp_dem_ratio < 1): 
+        if(supp_dem_ratio < 1):
             print("oversupply")
             # sell_price2 = math.floor(base_price - (base_price * (supp_dem_ratio)) / 2)
             sell_price2 = math.floor(base_price * (supp_dem_ratio) + math.ceil(supp_dem_ratio))

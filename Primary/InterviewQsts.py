@@ -12,6 +12,7 @@ def main():
     print("main")
     q1()
     q2()
+    q4()
 
 
 def q1():
@@ -91,6 +92,8 @@ def q3():
 
 
 def q4():
+    print("---------------------")
+    print("Q4, find lowest integer which doesn't exist in array")
     '''
     Good morning! Here's your coding interview problem for today.
 
@@ -104,7 +107,20 @@ def q4():
 
     You can modify the input array in-place.
     '''
+    # temp = [3,4,-1,1]   # find lowest possible integer which doesn't exist in the array
+    temp = [1, 2, 0]   # find lowest possible integer which doesn't exist in the array
+    temp_highest = temp[0]
+    for i in range (len(temp)):  # expected = 2
+        if temp_highest < temp[i]:
+            temp_highest = temp[i]
+            print("highest int in array: " + str(temp_highest))
+    temp_highest += 1
+    temp.append(temp_highest)
 
+
+
+
+    print(temp)
 
 if __name__ == "__main__":
     main()

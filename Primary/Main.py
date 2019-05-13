@@ -16,29 +16,33 @@ create dict wordFreq: {word,frequency}
 
 import wikipedia
 import numpy as np
+import random as rand
+import math
 
-articleName = "Library (computing)"
-# articleName = "Application programming interface"
-# print(wikipedia.summary(articleName, sentences = 1))
-# print(wikipedia.summary(articleName))
-textArr = wikipedia.summary(articleName).replace('\n',' ').split(' ')  # splits by empty spaces so it's separating everything into words
-textDict = {}   # item: value pairs
-
-print(textArr)
-
-for words in textArr:
-    textDict.update({words: 0})
 
 
 def main():
-    wiki_article_read()
+    #wiki_article_read()
     price_algo_test()
 
 def wiki_article_read():
+    articleName = "Library (computing)"
+    # articleName = "Application programming interface"
+    # print(wikipedia.summary(articleName, sentences = 1))
+    # print(wikipedia.summary(articleName))
+    textArr = wikipedia.summary(articleName).replace('\n', ' ').split(
+        ' ')  # splits by empty spaces so it's separating everything into words
+    textDict = {}  # item: value pairs
+    # print(textArr)
+
     print(textDict)
     print("---------------------")
     print("now look for the frequency of words")
     print("-------------------")
+
+    for words in textArr:
+        textDict.update({words: 0})
+
     # for word, frequency in textDict.items():  # iterate over all words in the item's
     for word in textArr:  # iterate over all words in the item's
         # HAVE TO ITIRATE NOT OVER ITSELF (the dict) BUT SOMETHING ELSE!
@@ -147,12 +151,45 @@ def wiki_article_read():
     print()
 
 def price_algo_test():
-    print("and this is price testing algorithm")
+    print("---------------------------")
+    print("this is price testing algorithm")
+
+    # in game my structure is like this
+        # where for all rows, column 0 = item name
+            # [item name] [ item price] [etc etc]
+            # Columns          Rows
+            # 0 1 2 3 4     # 0
+            # 0 1 2 3 4     # 1
+            # 0 1 2 3 4     # 2
+            # 0 1 2 3 4     # 3
+            # 0 1 2 3 4     # 4
+                #for the sake of simplifying this test, i'll work with a single item 1-D array instead
+
+    #                 0        1               2                   3
+    # itemsForSale: [itemName][quantity][buyPrice(fromPlayer)][sellPrice(toPlayer)]
+    #item_info = ["Bacon",0,0,0]
+    #print(item_info)
+    for i in range(10):
+        print("------")
+        print("run: " + str(i))
+        base_price = 10
+        dsupply = rand.randrange(0,100)
+        ddemand = rand.randrange(0,100)
+        print("base price: " + str(base_price))
+        print("Supply: " + str(dsupply))
+        print("Demand: " + str(ddemand))
+        print("supply demand ratio: aka (demand / supply) = " + str(ddemand / dsupply))
+        # sell_price1 = math.ceil(base_price + (base_price * (ddemand / dsupply)))
+        sell_price2 = math.ceil(base_price + (base_price * (ddemand / dsupply))/2)  # i think divided by 2 is BETTER
+        # print("sell price WITHOUT dividing by 2: " + str(sell_price1))
+        print("sell price WITH dividing by 2: " + str(sell_price2))
+
+
     # TODO implement the price algorithm i thought of for my game here
 
     '''
     price formula 
-    default ceil(price + (defaultPrice * supply/demand)/2)
+    default + ceil(price + (defaultPrice * supply/demand)/2)
     invert supply/demand to demand / supply?
     ---
     default price is 10

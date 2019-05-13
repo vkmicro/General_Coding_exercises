@@ -170,19 +170,36 @@ def price_algo_test():
     #item_info = ["Bacon",0,0,0]
     #print(item_info)
     for i in range(10):
-        print("------")
-        print("run: " + str(i))
+        print("------ " + str(i))
+        #print("run: " + str(i))
         base_price = 10
-        dsupply = rand.randrange(0,100)
-        ddemand = rand.randrange(0,100)
+        dsupply = rand.randrange(1,100)
+        ddemand = rand.randrange(1,100)
         print("base price: " + str(base_price))
         print("Supply: " + str(dsupply))
         print("Demand: " + str(ddemand))
-        print("supply demand ratio: aka (demand / supply) = " + str(ddemand / dsupply))
+        supp_dem_ratio = ddemand / dsupply
+        #print("supply demand ratio: aka (demand / supply) = " + str(ddemand / dsupply))
+        print("supply demand ratio: aka (demand / supply) = " + str(supp_dem_ratio))
         # sell_price1 = math.ceil(base_price + (base_price * (ddemand / dsupply)))
-        sell_price2 = math.ceil(base_price + (base_price * (ddemand / dsupply))/2)  # i think divided by 2 is BETTER
+        if(supp_dem_ratio < 1): 
+            print("oversupply")
+            # sell_price2 = math.floor(base_price - (base_price * (supp_dem_ratio)) / 2)
+            sell_price2 = math.floor(base_price * (supp_dem_ratio) + math.ceil(supp_dem_ratio))
+            print("sell price: " + str(sell_price2))
+        else:
+            print("under supply")
+            #sell_price2 = math.floor(base_price + (base_price * (supp_dem_ratio)) / 2)
+            sell_price2 = math.floor(base_price * (supp_dem_ratio))
+            print("sell price: " + str(sell_price2))
+
+       # else:
+         #   supp_dem_ratio
+
+       # sell_price2 = math.ceil(base_price + (base_price * (ddemand / dsupply))/2)  # i think divided by 2 is BETTER
+       # sell_price2 = math.ceil(base_price + (base_price * (supp_dem_ratio))/2)  # i think divided by 2 is BETTER
         # print("sell price WITHOUT dividing by 2: " + str(sell_price1))
-        print("sell price WITH dividing by 2: " + str(sell_price2))
+       # print("sell price WITH dividing by 2: " + str(sell_price2))
 
 
     # TODO implement the price algorithm i thought of for my game here

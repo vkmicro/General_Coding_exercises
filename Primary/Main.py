@@ -18,6 +18,11 @@ import wikipedia
 import numpy as np
 import random as rand
 import math
+import matplotlib
+import matplotlib.pyplot as plt
+
+#
+
 
 
 
@@ -169,9 +174,11 @@ def price_algo_test():
     # itemsForSale: [itemName][quantity][buyPrice(fromPlayer)][sellPrice(toPlayer)]
     #item_info = ["Bacon",0,0,0]
     #print(item_info)
+
+
     for i in range(10):
         print("------ " + str(i))
-        #print("run: " + str(i))
+        # print("run: " + str(i))
         base_price = 10
         # TODO: NORMALIZE SUPPLY / DEMAND SO THEY CAN"T BE TOO DIFFERENT!
         dsupply = rand.randrange(1,100)
@@ -180,7 +187,7 @@ def price_algo_test():
         print("Supply: " + str(dsupply))
         print("Demand: " + str(ddemand))
         supp_dem_ratio = ddemand / dsupply
-        #print("supply demand ratio: aka (demand / supply) = " + str(ddemand / dsupply))
+        # print("supply demand ratio: aka (demand / supply) = " + str(ddemand / dsupply))
         print("supply demand ratio: aka (demand / supply) = " + str(supp_dem_ratio))
         # sell_price1 = math.ceil(base_price + (base_price * (ddemand / dsupply)))
         if(supp_dem_ratio < 1):
@@ -190,17 +197,10 @@ def price_algo_test():
             print("sell price: " + str(sell_price2))
         else:
             print("under supply")
-            #sell_price2 = math.floor(base_price + (base_price * (supp_dem_ratio)) / 2)
+            # sell_price2 = math.floor(base_price + (base_price * (supp_dem_ratio)) / 2)
             sell_price2 = math.floor(base_price * (supp_dem_ratio))
             print("sell price: " + str(sell_price2))
 
-       # else:
-         #   supp_dem_ratio
-
-       # sell_price2 = math.ceil(base_price + (base_price * (ddemand / dsupply))/2)  # i think divided by 2 is BETTER
-       # sell_price2 = math.ceil(base_price + (base_price * (supp_dem_ratio))/2)  # i think divided by 2 is BETTER
-        # print("sell price WITHOUT dividing by 2: " + str(sell_price1))
-       # print("sell price WITH dividing by 2: " + str(sell_price2))
 
 
     # TODO implement the price algorithm i thought of for my game here

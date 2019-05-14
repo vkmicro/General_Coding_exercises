@@ -18,7 +18,7 @@ import wikipedia
 import numpy as np
 import random as rand
 import math
-import matplotlib
+
 import matplotlib.pyplot as plt
 
 #
@@ -172,14 +172,20 @@ def price_algo_test():
 
     #                 0        1               2                   3
     # itemsForSale: [itemName][quantity][buyPrice(fromPlayer)][sellPrice(toPlayer)]
-    #item_info = ["Bacon",0,0,0]
-    #print(item_info)
+    # item_info = ["Bacon",0,0,0]
+    # print(item_info)
 
+    # temp lists to use for plotting
+    list_of_prices = []
+    list_of_iterations = []
+    base_price_list = []
+    base_price = 10
+    old_price = base_price
 
-    for i in range(10):
+    # generate new prices
+    for i in range(500):
         print("------ " + str(i))
         # print("run: " + str(i))
-        base_price = 10
         # TODO: NORMALIZE SUPPLY / DEMAND SO THEY CAN"T BE TOO DIFFERENT!
         dsupply = rand.randrange(1,100)
         ddemand = rand.randrange(1,100)
@@ -189,19 +195,58 @@ def price_algo_test():
         supp_dem_ratio = ddemand / dsupply
         # print("supply demand ratio: aka (demand / supply) = " + str(ddemand / dsupply))
         print("supply demand ratio: aka (demand / supply) = " + str(supp_dem_ratio))
+        print()
         # sell_price1 = math.ceil(base_price + (base_price * (ddemand / dsupply)))
         if(supp_dem_ratio < 1):
-            print("oversupply")
+            print("oversupply, price drops")
             # sell_price2 = math.floor(base_price - (base_price * (supp_dem_ratio)) / 2)
-            sell_price2 = math.floor(base_price * (supp_dem_ratio) + math.ceil(supp_dem_ratio))
-            print("sell price: " + str(sell_price2))
+            # sell_price2 = math.floor(base_price * (supp_dem_ratio) + math.ceil(supp_dem_ratio))
+            # sell_price2 = math.floor(base_price * (supp_dem_ratio) + math.ceil(supp_dem_ratio)) # THIS IS THE ORIGINAL
+            sell_price_calculated = math.floor(base_price * (supp_dem_ratio) + math.ceil(supp_dem_ratio) * 5)
+            print("price: " + str(sell_price_calculated))
+            print("old price: " + str(old_price))
+            while (sell_price_calculated > old_price * 2 or sell_price_calculated > base_price * 15):
+                print("price is over 2x old price " + str(old_price*2) + " recalculate it")
+                dsupply = rand.randrange(1, 100)
+                ddemand = rand.randrange(1, 100)
+                supp_dem_ratio = ddemand / dsupply
+                sell_price_calculated = math.floor(base_price * (supp_dem_ratio) + math.ceil(supp_dem_ratio) * 5)
+
+                print("price: " + str(sell_price_calculated))
+            else:
+                old_price = sell_price_calculated
+                sell_price2 = sell_price_calculated
         else:
-            print("under supply")
-            # sell_price2 = math.floor(base_price + (base_price * (supp_dem_ratio)) / 2)
-            sell_price2 = math.floor(base_price * (supp_dem_ratio))
-            print("sell price: " + str(sell_price2))
+            print("undersupply, price increases")
+            sell_price_calculated = math.floor(base_price * (supp_dem_ratio) + math.ceil(supp_dem_ratio))
+            print("price: " + str(sell_price_calculated))
+            print("old price: " + str(old_price))
+            while(sell_price_calculated < old_price/4 or sell_price_calculated > base_price*15):
+                print("price is too low, below  old price/2 " + str(old_price / 4) + " recalculate it")
+                dsupply = rand.randrange(1, 100)
+                ddemand = rand.randrange(1, 100)
+                supp_dem_ratio = ddemand / dsupply
+                sell_price_calculated = math.floor(base_price * (supp_dem_ratio) + math.ceil(supp_dem_ratio)*3)
+
+                print("price: " + str(sell_price_calculated))
+            else:
+                old_price = sell_price_calculated
+                sell_price2 = sell_price_calculated
+
+        print("sell price: " + str(sell_price2))
 
 
+        # append results to lists which will be used for plotting
+        list_of_iterations.append(i)
+        list_of_prices.append(sell_price2)
+        base_price_list.append(base_price)
+
+    plt.ylabel("price")
+    plt.xlabel("iterations")
+    plt.scatter(list_of_iterations, list_of_prices)
+    #plt.plot(list_of_iterations, list_of_prices)
+    plt.plot(list_of_iterations, base_price_list, 'r' )
+    plt.show()
 
     # TODO implement the price algorithm i thought of for my game here
 

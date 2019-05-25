@@ -13,6 +13,7 @@ def main():
     q1()
     q2()
     q4()
+    q5()
 
 
 def q1():
@@ -116,11 +117,47 @@ def q4():
             print("highest int in array: " + str(temp_highest))
     temp_highest += 1
     temp.append(temp_highest)
-
-
-
-
     print(temp)
+
+
+def q5():
+    '''
+       Good morning! Here's your coding interview problem for today.
+
+   This problem was asked by Amazon.
+
+   Given a string s and an integer k, break up the string into multiple lines such that each line has a length of k or less.
+    You must break it up so that words don't break across lines. Each line has to have the maximum possible amount of words.
+     If there's no way to break the text up, then return null.
+
+   You can assume that there are no spaces at the ends of the string and that there is exactly one space between each word.
+
+   For example, given the string "the quick brown fox jumps over the lazy dog" and k = 10, you should return:
+    ["the quick", "brown fox", "jumps over", "the lazy", "dog"]. No string in the list has a length of more than 10
+       :return:
+       '''
+    input = "the quick brown fox jumps over the lazy dog"
+    k = 10
+    i = 0
+    temp = []
+    res_arr = []
+    for char in input:
+        if i < 9:
+            temp.append(char)
+            i += 1
+        else:
+            temp_string = ''.join(temp)
+            res_arr.append(temp_string)
+            temp = []
+            i = 0
+    print(res_arr)
+
+    # this doesn't include the dog on its own.... ehhh -_-
+        # since it only cares about it being <= 9. if it's over 9 then it goes into else,
+        # need to check if next char is null
+
+
+   # print("q5")
 
 if __name__ == "__main__":
     main()
